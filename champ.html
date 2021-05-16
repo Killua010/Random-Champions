@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Champions</title>
+</head>
+<body>
+    <div class="container">
+        <h2 id="champion_name"></h2>
+        <img id="champion_img" />
+    </div>
+</body>
+<style>
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+</style>
+<script type="text/javascript">
+
+const xhr = new XMLHttpRequest();
+
+window.onload = function() {
+    xhr.open('GET', 'http://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion.json');
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+                const champions = JSON.parse(xhr.responseText).data;
+                const indexRandomChampion = Math.floor(Math.random() * Object.keys(champions).length);
+                fillPageChampionName(Object.keys(champions)[indexRandomChampion])
+            }
+        }
+    }
+}
+
+function fillPageChampionName(championName) {
+    xhr.open('GET', `http://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion/${championName}.json`);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+                const chmapionData = JSON.parse(xhr.responseText).data;
+                const championNameReturnJson = Object.keys(chmapionData)[0];
+                document.getElementById("champion_name").append(championNameReturnJson)
+                fillPageChampionImage(chmapionData[championNameReturnJson].image.full)
+            }
+        }
+    }
+}
+
+function fillPageChampionImage(imgName) {
+    document.getElementById("champion_img").src = `http://ddragon.leagueoflegends.com/cdn/11.10.1/img/champion/${imgName}`;
+}
+
+</script>
+</html>
