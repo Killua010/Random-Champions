@@ -40,7 +40,7 @@
 const xhr = new XMLHttpRequest();
 
 window.onload = function() {
-    xhr.open('GET', 'http://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion.json');
+    xhr.open('GET', 'https://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion.json');
     xhr.send();
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4) {
@@ -54,7 +54,7 @@ window.onload = function() {
 }
 
 function fillPageChampionName(championName) {
-    xhr.open('GET', `http://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion/${championName}.json`);
+    xhr.open('GET', `https://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion/${championName}.json`);
     xhr.send();
     xhr.onreadystatechange = () => {
         if(xhr.readyState == 4) {
@@ -69,7 +69,7 @@ function fillPageChampionName(championName) {
 }
 
 function fillPageChampionImage(imgName) {
-    document.getElementById("champion_img").src = `http://ddragon.leagueoflegends.com/cdn/11.10.1/img/champion/${imgName}`;
+    document.getElementById("champion_img").src = `https://ddragon.leagueoflegends.com/cdn/11.10.1/img/champion/${imgName}`;
 }
 
 </script>
