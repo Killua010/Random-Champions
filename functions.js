@@ -12,7 +12,7 @@ function getRandomChampion() {
             if (xhr.status == 200) {
                 const champions = JSON.parse(xhr.responseText).data;
                 const indexRandomChampion = Math.floor(Math.random() * Object.keys(champions).length);
-                fillPageChampionName(Object.keys(champions)[indexRandomChampion])
+                fillPageChampionName(champions[Object.keys(champions)[indexRandomChampion]].name)
             }
         }
     }
