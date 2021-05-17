@@ -12,7 +12,7 @@ function getRandomChampion() {
             if (xhr.status == 200) {
                 const champions = JSON.parse(xhr.responseText).data;
                 const indexRandomChampion = Math.floor(Math.random() * Object.keys(champions).length);
-                fillPageChampionName(champions[Object.keys(champions)[indexRandomChampion]].name)
+                fillPageChampionName(Object.keys(champions)[indexRandomChampion])
             }
         }
     }
@@ -26,7 +26,7 @@ function fillPageChampionName(championName) {
             if (xhr.status == 200) {
                 const chmapionData = JSON.parse(xhr.responseText).data;
                 const championNameReturnJson = Object.keys(chmapionData)[0];
-                document.getElementById("champion_name").innerHTML = championNameReturnJson;
+                document.getElementById("champion_name").innerHTML = chmapionData[championNameReturnJson].name;
                 fillPageChampionImage(chmapionData[championNameReturnJson].image.full);
             }
         }
