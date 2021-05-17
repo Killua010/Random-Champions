@@ -1,6 +1,10 @@
 const xhr = new XMLHttpRequest();
 
 window.onload = function () {
+    getRandomChampion();
+}
+
+function getRandomChampion() {
     xhr.open('GET', 'https://ddragon.leagueoflegends.com/cdn/11.10.1/data/pt_BR/champion.json');
     xhr.send();
     xhr.onreadystatechange = () => {
@@ -22,8 +26,8 @@ function fillPageChampionName(championName) {
             if (xhr.status == 200) {
                 const chmapionData = JSON.parse(xhr.responseText).data;
                 const championNameReturnJson = Object.keys(chmapionData)[0];
-                document.getElementById("champion_name").append(championNameReturnJson)
-                fillPageChampionImage(chmapionData[championNameReturnJson].image.full)
+                document.getElementById("champion_name").innerHTML = championNameReturnJson;
+                fillPageChampionImage(chmapionData[championNameReturnJson].image.full);
             }
         }
     }
